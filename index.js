@@ -18,7 +18,6 @@ module.exports = function (config, windowParams) {
     );
 
     return new Promise(function (resolve, reject) {
-
       rely.authenticate('http://steamcommunity.com/openid', false, function (error, providerUrl) {
         const authWindow = new BrowserWindow(windowParams || {'use-content-size': true});
 
