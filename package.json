@@ -1,0 +1,55 @@
+{
+  "name": "electron-steam-auth",
+  "version": "1.0.0",
+  "description": "An OpenID module to authenticate to Steam for your Electron app.",
+  "license": "MIT",
+  "repository": "vincent/electron-steam-auth",
+  "author": {
+    "name": "Vincent Lark",
+    "email": "vincent.lark@gmail.com"
+  },
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "xo"
+  },
+  "keywords": [
+    "electron",
+    "openid",
+    "steam",
+    "authentication",
+    "access token"
+  ],
+  "devDependencies": {
+    "ava": "^0.8.0",
+    "electron": "^0.4.1",
+    "mocha": "^2.5.3",
+    "xo": "^0.12.1"
+  },
+  "dependencies": {
+    "node-fetch": "^1.3.3",
+    "object-assign": "^4.0.1",
+    "pinkie-promise": "^2.0.0"
+  },
+  "engines": {
+    "node": ">= 4.0"
+  },
+  "xo": {
+    "space": true,
+    "globals": [
+      "describe",
+      "it"
+    ],
+    "rules": {
+      "brace-style": [
+        2,
+        "1tbs",
+        {
+          "allowSingleLine": true
+        }
+      ],
+      "camelcase": 0
+    }
+  }
+}
