@@ -32,12 +32,7 @@ app.on('ready', () => {
 
   myApiOauth.getAccessToken(options)
     .then(token => {
-      // use your token.access_token
-
-      myApiOauth.refreshToken(token.refresh_token)
-        .then(newToken => {
-          //use your new token
-        });
+      // use your token.steam_id
     });
 });
 ```
