@@ -1,13 +1,11 @@
 'use strict';
 
 const Promise = require('pinkie-promise');
-//const objectAssign = require('object-assign');
 const nodeUrl = require('url');
 const BrowserWindow = require('electron').BrowserWindow;
 const openid = require('openid');
 
 module.exports = function (config, windowParams) {
-
   function getAuthorizationCode(opts) {
     opts = opts || {};
 
@@ -22,7 +20,6 @@ module.exports = function (config, windowParams) {
     return new Promise(function (resolve, reject) {
 
       rely.authenticate('http://steamcommunity.com/openid', false, function (error, providerUrl) {
-
         const authWindow = new BrowserWindow(windowParams || {'use-content-size': true});
 
         authWindow.loadURL(providerUrl);
@@ -35,7 +32,7 @@ module.exports = function (config, windowParams) {
         function onCallback(url) {
           var query = nodeUrl.parse(url, true).query;
 
-          if (! query.query['openid.identity']) {
+          if (query.query['openid.identity'] === undefined) {
             reject(new Error('cannot authenticate through Steam'));
             authWindow.removeAllListeners('closed');
             setImmediate(function () {
@@ -68,6 +65,6 @@ module.exports = function (config, windowParams) {
   }
 
   return {
-    getAuthorizationCode: getAuthorizationCode,
+    getAuthorizationCode: getAuthorizationCode
   };
 };
