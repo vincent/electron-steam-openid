@@ -1,9 +1,9 @@
 {
-  "name": "electron-steam-auth",
+  "name": "electron-steam-openid",
   "version": "1.0.0",
   "description": "An OpenID module to authenticate to Steam for your Electron app.",
   "license": "MIT",
-  "repository": "vincent/electron-steam-auth",
+  "repository": "vincent/electron-steam-openid",
   "author": {
     "name": "Vincent Lark",
     "email": "vincent.lark@gmail.com"
