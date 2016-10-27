@@ -1,4 +1,4 @@
-# electron-steam-auth [![Build Status](https://travis-ci.org/vincent/electron-steam-auth.svg?branch=master)](https://travis-ci.org/vincent/electron-steam-auth)
+# electron-steam-openid [![Build Status](https://travis-ci.org/vincent/electron-steam-openid.svg?branch=master)](https://travis-ci.org/vincent/electron-steam-openid)
 
 > A library to handle Steam authentication with OpenID, for your [Electron](http://electron.atom.io) app.
 
@@ -6,14 +6,14 @@
 ## Install
 
 ```
-$ npm install --save electron-steam-auth
+$ npm install --save electron-steam-openid
 ```
 
 
 ## Usage
 
 ```js
-const electronSteamAuth = require('electron-steam-auth');
+const electronSteamAuth = require('electron-steam-openid');
 
 var config = {
   redirectUri: 'http://localhost'
