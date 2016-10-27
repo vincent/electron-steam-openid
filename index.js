@@ -31,7 +31,7 @@ module.exports = function (config, windowParams) {
         function onCallback(url) {
           var query = nodeUrl.parse(url, true).query;
 
-          if (query.query['openid.identity'] === undefined) {
+          if (query['openid.identity'] === undefined) {
             reject(new Error('cannot authenticate through Steam'));
             authWindow.removeAllListeners('closed');
             setImmediate(function () {
