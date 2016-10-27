@@ -1,12 +1,10 @@
 'use strict';
 
 const Promise = require('pinkie-promise');
-const queryString = require('querystring');
-const fetch = require('node-fetch');
-const objectAssign = require('object-assign');
+//const objectAssign = require('object-assign');
 const nodeUrl = require('url');
 const BrowserWindow = require('electron').BrowserWindow;
-import openid from 'openid';
+const openid = require('openid');
 
 module.exports = function (config, windowParams) {
 
@@ -27,7 +25,7 @@ module.exports = function (config, windowParams) {
 
         const authWindow = new BrowserWindow(windowParams || {'use-content-size': true});
 
-        authWindow.loadURL(url);
+        authWindow.loadURL(providerUrl);
         authWindow.show();
 
         authWindow.on('closed', () => {
@@ -35,24 +33,21 @@ module.exports = function (config, windowParams) {
         });
 
         function onCallback(url) {
-          var url_parts = nodeUrl.parse(url, true);
-          var query = url_parts.query;
-          var code = query.code;
-          var error = query.error;
+          var query = nodeUrl.parse(url, true).query;
 
-          if (error !== undefined) {
-            reject(error);
+          if (! query.query['openid.identity']) {
+            reject(new Error('cannot authenticate through Steam'));
             authWindow.removeAllListeners('closed');
             setImmediate(function () {
               authWindow.close();
             });
-          } else if (code) {
+          } else {
             resolve({
-              response_nonce: tokens.query['openid.response_nonce'],
-              assoc_handle:   tokens.query['openid.assoc_handle'],
-              identity:       tokens.query['openid.identity'],
-              steam_id:       tokens.query['openid.identity'].match(/id\/(.*$)/)[1],
-              sig:            tokens.query['openid.sig']
+              response_nonce: query['openid.response_nonce'],
+              assoc_handle: query['openid.assoc_handle'],
+              identity: query['openid.identity'],
+              steam_id: query['openid.identity'].match(/id\/(.*$)/)[1],
+              sig: query['openid.sig']
             });
             authWindow.removeAllListeners('closed');
             setImmediate(function () {
