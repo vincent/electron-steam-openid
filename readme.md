@@ -28,9 +28,9 @@ app.on('ready', () => {
     }
   }
 
-  const steamOpenID = electronSteamAuth(config, windowParams);
+  const auth = electronSteamAuth(config, windowParams);
 
-  myApiOauth.getAccessToken(options)
+  auth.authenticate(options)
     .then(token => {
       // use your token.steam_id
     });

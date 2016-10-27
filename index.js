@@ -6,7 +6,7 @@ const BrowserWindow = require('electron').BrowserWindow;
 const openid = require('openid');
 
 module.exports = function (config, windowParams) {
-  function getAuthorizationCode(opts) {
+  function authenticate(opts) {
     opts = opts || {};
 
     var rely = new openid.RelyingParty(
@@ -64,6 +64,6 @@ module.exports = function (config, windowParams) {
   }
 
   return {
-    getAuthorizationCode: getAuthorizationCode
+    authenticate: authenticate
   };
 };
