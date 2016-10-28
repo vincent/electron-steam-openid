@@ -42,7 +42,7 @@ module.exports = function (config, windowParams) {
               response_nonce: query['openid.response_nonce'],
               assoc_handle: query['openid.assoc_handle'],
               identity: query['openid.identity'],
-              steam_id: query['openid.identity'].match(/id\/(.*$)/)[1],
+              steam_id: query['openid.identity'].match(/\/id\/(.*$)/)[1],
               sig: query['openid.sig']
             });
             authWindow.removeAllListeners('closed');
