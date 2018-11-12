@@ -4,6 +4,7 @@ const Promise = require('pinkie-promise');
 const nodeUrl = require('url');
 const BrowserWindow = require('electron').BrowserWindow;
 const openid = require('openid');
+const {session} = require('electron');
 
 module.exports = function (config, windowParams) {
   function authenticate(opts) {
@@ -56,8 +57,18 @@ module.exports = function (config, windowParams) {
           onCallback(url);
         });
 
-        authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
+        // This event is deprecated as of electron 3.0. 
+        /*authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
           onCallback(newUrl);
+        });*/
+
+        // Use this to replace deprecated event above
+        session.defaultSession.webRequest.onBeforeRedirect((details, callback) => {
+          // twitter
+          if(details.redirectURL.toLowerCase().indexOf('twitter') === -1)
+          {
+            onCallback(details.redirectURL);
+          }
         });
       });
     });
